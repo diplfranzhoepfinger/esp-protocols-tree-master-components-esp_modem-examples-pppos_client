@@ -10,11 +10,13 @@
 #include "esp_log.h"
 #include "esp_intr_alloc.h"
 #include "usb/usb_host.h"
+#include "modem_pwkey.h"
 
 #define DAEMON_TASK_PRIORITY    2
 #define CLASS_TASK_PRIORITY     3
 
 extern void class_driver_task(void *arg);
+extern void simple_cmux_client_main(void);
 
 static const char *TAG = "DAEMON";
 
@@ -56,6 +58,18 @@ static void host_lib_daemon_task(void *arg)
 
 void app_main(void)
 {
+
+
+
+    init_modem_pwkey();
+
+    power_down_modem_pwkey();
+
+    // power Up does work now. .
+    power_up_modem_pwkey();
+
+
+
     SemaphoreHandle_t signaling_sem = xSemaphoreCreateBinary();
 
     TaskHandle_t daemon_task_hdl;
