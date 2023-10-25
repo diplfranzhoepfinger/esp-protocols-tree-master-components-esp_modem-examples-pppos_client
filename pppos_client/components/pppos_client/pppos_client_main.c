@@ -254,7 +254,7 @@ void pppos_client_main(void)
     esp_err_t err = esp_modem_get_signal_quality(dce, &rssi, &ber);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "esp_modem_get_signal_quality failed with %d %s", err, esp_err_to_name(err));
-        return;
+        //return;
     }
     ESP_LOGI(TAG, "Signal quality: rssi=%d, ber=%d", rssi, ber);
 
