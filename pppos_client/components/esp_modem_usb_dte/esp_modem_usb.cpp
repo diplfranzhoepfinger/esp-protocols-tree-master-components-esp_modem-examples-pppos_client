@@ -89,10 +89,12 @@ public:
         const uint8_t intf_idx = term_idx == 0 ? usb_config->interface_idx : usb_config->secondary_interface_idx;
 
         if (usb_config->cdc_compliant) {
+        	ESP_LOGI(TAG, "*** USB Config is CDC compliant");
             ESP_MODEM_THROW_IF_ERROR(
                 this->CdcAcmDevice::open(usb_config->vid, usb_config->pid, intf_idx, &esp_modem_cdc_acm_device_config),
                 "USB Device open failed");
         } else {
+        	ESP_LOGI(TAG, "*** USB Config is not CDC compliant, so open Vendor specific");
             ESP_MODEM_THROW_IF_ERROR(
                 this->CdcAcmDevice::open_vendor_specific(usb_config->vid, usb_config->pid, intf_idx, &esp_modem_cdc_acm_device_config),
                 "USB Device open failed");
