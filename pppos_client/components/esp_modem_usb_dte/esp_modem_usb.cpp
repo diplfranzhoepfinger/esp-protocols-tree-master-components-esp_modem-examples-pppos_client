@@ -86,7 +86,21 @@ public:
         };
 
         // Determine Terminal interface index
-        const uint8_t intf_idx = term_idx == 0 ? usb_config->interface_idx : usb_config->secondary_interface_idx;
+
+        uint8_t intf_idx = 0;
+
+
+        switch(term_idx) {
+        case 0:
+        	intf_idx = usb_config->interface_idx;
+        	break;
+        case 1:
+        	intf_idx = usb_config->secondary_interface_idx;
+        	break;
+        case 2:
+        	intf_idx = usb_config->tertiary_interface_idx;
+        	break;
+        }
 
         if (usb_config->cdc_compliant) {
         	ESP_LOGI(TAG, "*** USB Config is CDC compliant");
